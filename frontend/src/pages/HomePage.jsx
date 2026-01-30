@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import MovieList from '../components/MovieList';
 import movieAPI from '../services/api';
 import './HomePage.css';
 
@@ -64,71 +63,31 @@ const HomePage = () => {
       trailerUrl: 'https://www.youtube.com/embed/YoHD9XEInc0'
     },
     {
-  _id: '5',
-  name: 'The Matrix',
-  genre: 'Sci-Fi',
-  releaseYear: 1999,
-  rating: 8.7,
-  runtime: 136,
-  description: 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
-  image: 'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg',
-  trailerUrl: 'https://www.youtube.com/embed/vKQi3bBA1y8'
-},
-{
-  _id: '6',
-  name: 'Interstellar',
-  genre: 'Sci-Fi',
-  releaseYear: 2014,
-  rating: 8.6,
-  runtime: 169,
-  description: 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.',
-  image: 'https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg',
-  trailerUrl: 'https://www.youtube.com/embed/zSWdZVtXT7E'
-},
+      _id: '5',
+      name: 'The Matrix',
+      genre: 'Sci-Fi',
+      releaseYear: 1999,
+      rating: 8.7,
+      runtime: 136,
+      description: 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
+      image: 'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg',
+      trailerUrl: 'https://www.youtube.com/embed/vKQi3bBA1y8'
+    },
+    {
+      _id: '6',
+      name: 'Interstellar',
+      genre: 'Sci-Fi',
+      releaseYear: 2014,
+      rating: 8.6,
+      runtime: 169,
+      description: 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.',
+      image: 'https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg',
+      trailerUrl: 'https://www.youtube.com/embed/zSWdZVtXT7E'
+    },
   ];
 
-  // FIXED: Check authentication on mount
-  useEffect(() => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-    const token = localStorage.getItem('token');
-    
-    console.log('🔍 HomePage - Authentication check:', {
-      isAuthenticated: localStorage.getItem('isAuthenticated'),
-      hasToken: !!token,
-      tokenPreview: token ? token.substring(0, 20) + '...' : 'none',
-      userName: localStorage.getItem('userName'),
-      userEmail: localStorage.getItem('userEmail')
-    });
-    
-    if (!isAuthenticated || !token) {
-      console.log('❌ Not authenticated, redirecting to login');
-      navigate('/login');
-      return;
-    }
-    
-    // Get user name from localStorage (now stored by login/signup)
-    const storedUser = localStorage.getItem('user');
-    let userName = 'Movie Lover';
-    
-    if (storedUser) {
-      try {
-        const userData = JSON.parse(storedUser);
-        userName = userData.name || userData.email?.split('@')[0] || localStorage.getItem('userName') || 'Movie Lover';
-      } catch (e) {
-        console.error('Error parsing user data:', e);
-        userName = localStorage.getItem('userName') || 'Movie Lover';
-      }
-    } else {
-      userName = localStorage.getItem('userName') || 'Movie Lover';
-    }
-    
-    setUser(userName);
-    
-    // Fetch movies immediately
-    fetchMoviesAndStats();
-  }, [refreshTrigger, navigate]);
-
-  const fetchMoviesAndStats = async () => {
+  // FIXED: Wrap fetchMoviesAndStats in useCallback to prevent infinite re-renders
+  const fetchMoviesAndStats = useCallback(async () => {
     try {
       setLoadingStats(true);
       let moviesData = [];
@@ -213,7 +172,48 @@ const HomePage = () => {
     } finally {
       setLoadingStats(false);
     }
-  };
+  }, [sampleMovies]); // FIXED: Added sampleMovies as dependency
+
+  // FIXED: Check authentication on mount
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    const token = localStorage.getItem('token');
+    
+    console.log('🔍 HomePage - Authentication check:', {
+      isAuthenticated: localStorage.getItem('isAuthenticated'),
+      hasToken: !!token,
+      tokenPreview: token ? token.substring(0, 20) + '...' : 'none',
+      userName: localStorage.getItem('userName'),
+      userEmail: localStorage.getItem('userEmail')
+    });
+    
+    if (!isAuthenticated || !token) {
+      console.log('❌ Not authenticated, redirecting to login');
+      navigate('/login');
+      return;
+    }
+    
+    // Get user name from localStorage (now stored by login/signup)
+    const storedUser = localStorage.getItem('user');
+    let userName = 'Movie Lover';
+    
+    if (storedUser) {
+      try {
+        const userData = JSON.parse(storedUser);
+        userName = userData.name || userData.email?.split('@')[0] || localStorage.getItem('userName') || 'Movie Lover';
+      } catch (e) {
+        console.error('Error parsing user data:', e);
+        userName = localStorage.getItem('userName') || 'Movie Lover';
+      }
+    } else {
+      userName = localStorage.getItem('userName') || 'Movie Lover';
+    }
+    
+    setUser(userName);
+    
+    // Fetch movies immediately
+    fetchMoviesAndStats();
+  }, [refreshTrigger, navigate, fetchMoviesAndStats]); // FIXED: Added fetchMoviesAndStats to dependency array
 
   const handleRefresh = () => {
     console.log('🔄 Refreshing data...');
