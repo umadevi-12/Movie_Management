@@ -62,28 +62,28 @@ const HomePage = () => {
       image: 'https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg',
       trailerUrl: 'https://www.youtube.com/embed/YoHD9XEInc0'
     },
-    {
-      _id: '5',
-      name: 'The Matrix',
-      genre: 'Sci-Fi',
-      releaseYear: 1999,
-      rating: 8.7,
-      runtime: 136,
-      description: 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
-      image: 'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg',
-      trailerUrl: 'https://www.youtube.com/embed/vKQi3bBA1y8'
-    },
-    {
-      _id: '6',
-      name: 'Interstellar',
-      genre: 'Sci-Fi',
-      releaseYear: 2014,
-      rating: 8.6,
-      runtime: 169,
-      description: 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.',
-      image: 'https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg',
-      trailerUrl: 'https://www.youtube.com/embed/zSWdZVtXT7E'
-    },
+    // {
+    //   _id: '5',
+    //   name: 'The Matrix',
+    //   genre: 'Sci-Fi',
+    //   releaseYear: 1999,
+    //   rating: 8.7,
+    //   runtime: 136,
+    //   description: 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.',
+    //   image: 'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg',
+    //   trailerUrl: 'https://www.youtube.com/embed/vKQi3bBA1y8'
+    // },
+    // {
+    //   _id: '6',
+    //   name: 'Interstellar',
+    //   genre: 'Sci-Fi',
+    //   releaseYear: 2014,
+    //   rating: 8.6,
+    //   runtime: 169,
+    //   description: 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity\'s survival.',
+    //   image: 'https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg',
+    //   trailerUrl: 'https://www.youtube.com/embed/zSWdZVtXT7E'
+    // },
   ];
 
   // FIXED: Wrap fetchMoviesAndStats in useCallback to prevent infinite re-renders
