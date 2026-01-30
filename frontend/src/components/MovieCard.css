@@ -1,0 +1,277 @@
+/* MovieCard.css */
+
+.movie-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  border-color: #444;
+}
+
+.movie-poster {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.movie-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.movie-poster-img.placeholder {
+  object-fit: contain;
+  padding: 20px;
+  background: #2a2a2a;
+}
+
+.movie-card:hover .movie-poster-img {
+  transform: scale(1.05);
+}
+
+.movie-poster-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .movie-poster-overlay {
+  opacity: 1;
+}
+
+.trailer-play-btn {
+  background: rgba(229, 9, 20, 0.9);
+  color: white;
+  border: none;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.5);
+}
+
+.trailer-play-btn:hover {
+  transform: scale(1.1);
+  background: rgba(229, 9, 20, 1);
+  box-shadow: 0 0 40px rgba(229, 9, 20, 0.7);
+}
+
+.movie-rating-overlay {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffd700;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border: 2px solid #ffd700;
+}
+
+.movie-info {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-header {
+  margin-bottom: 15px;
+}
+
+.movie-title {
+  font-size: 1.4rem;
+  margin: 0 0 10px;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.movie-meta {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.movie-year,
+.movie-genre,
+.movie-runtime {
+  color: #aaa;
+  font-size: 0.9rem;
+  padding: 4px 8px;
+  background: #2a2a2a;
+  border-radius: 4px;
+}
+
+.movie-description {
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex: 1;
+}
+
+.movie-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.edit-btn {
+  background: rgba(95, 106, 170, 0.1);
+  color: #48c6df;
+  border: 2px solid #635ab2;
+}
+
+.edit-btn:hover {
+  background:#72bccb;
+  /* transform: translateY(-2px); */
+}
+
+.delete-btn {
+  background: rgba(187, 95, 153, 0.1);
+  color: #f44336;
+  border: 2px solid #f44336;
+}
+
+.delete-btn:hover {
+  background: olive;
+  /* transform: translateY(-2px); */
+}
+
+.delete-confirmation-card {
+  margin-top: 15px;
+  padding: 15px;
+  background: rgba(244, 67, 54, 0.1);
+  border-radius: 8px;
+  border: 1px solid #f44336;
+}
+
+.delete-confirmation-card p {
+  margin: 0 0 10px;
+  color: #fff;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.delete-confirm-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.confirm-btn,
+.cancel-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.confirm-btn {
+  background: #f44336;
+  color: white;
+}
+
+.confirm-btn:hover {
+  background: #d32f2f;
+  transform: translateY(-2px);
+}
+
+.cancel-btn {
+  background: #666;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #777;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .movie-poster {
+    height: 350px;
+  }
+  
+  .movie-title {
+    font-size: 1.3rem;
+  }
+  
+  .action-btn {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .movie-poster {
+    height: 300px;
+  }
+  
+  .movie-info {
+    padding: 15px;
+  }
+  
+  .movie-title {
+    font-size: 1.2rem;
+  }
+  
+  .movie-meta {
+    gap: 10px;
+  }
+  
+  .movie-year,
+  .movie-genre,
+  .movie-runtime {
+    font-size: 0.85rem;
+    padding: 3px 6px;
+  }
+  
+  .movie-description {
+    font-size: 0.9rem;
+  }
+}

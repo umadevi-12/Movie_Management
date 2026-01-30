@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#667eea" />
+    <meta
+      name="description"
+      content="Movie Manager - A full-stack application for managing your personal movie collection"
+    />
+    <meta name="keywords" content="movies, collection, manager, rating, tracker" />
+    <meta name="author" content="Movie Manager Team" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://movie-manager.example.com" />
+    <meta property="og:title" content="Movie Manager - Personal Movie Collection" />
+    <meta property="og:description" content="Organize, rate, and manage your personal movie collection" />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://movie-manager.example.com" />
+    <meta property="twitter:title" content="Movie Manager - Personal Movie Collection" />
+    <meta property="twitter:description" content="Organize, rate, and manage your personal movie collection" />
+    <meta property="twitter:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <title>🎬 Movie Manager - Your Personal Movie Collection</title>
+    
+    <!-- Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <style>
+      /* Loading Screen */
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        z-index: 9999;
+      }
+      
+      .loading-logo {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        animation: bounce 2s infinite;
+      }
+      
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+      }
+      
+      .loading-text {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+      <div class="loading-logo">🎬</div>
+      <div class="loading-text">Loading Movie Manager...</div>
+    </div>
+    
+    <!-- Root Div -->
+    <div id="root"></div>
+    
+    <!-- Script to hide loading screen -->
+    <script>
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.getElementById('loading-screen').style.display = 'none';
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>
