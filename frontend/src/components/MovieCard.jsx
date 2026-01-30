@@ -16,24 +16,8 @@ const MovieCard = ({
 }) => {
   const [editedMovie, setEditedMovie] = useState({ ...movie });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditedMovie(prev => ({
-      ...prev,
-      [name]: name === 'rating' || name === 'runtime' || name === 'releaseYear' 
-        ? parseFloat(value) || 0 
-        : value
-    }));
-  };
-
-  const handleSave = () => {
-    onSave(movie._id, editedMovie);
-  };
-
-  const handleCancel = () => {
-    setEditedMovie({ ...movie });
-    onCancel();
-  };
+  // Removed unused functions: handleInputChange, handleSave, handleCancel
+  // These were likely used in an edit mode that's not implemented in this version
 
   const handleTrailerClick = (e) => {
     e.stopPropagation();

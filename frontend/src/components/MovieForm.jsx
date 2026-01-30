@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { movieAPI } from '../services/api';
 import PropTypes from 'prop-types';
@@ -26,15 +26,10 @@ const MovieForm = ({ movieId, onSuccess }) => {
     'Thriller', 'War', 'Western'
   ];
 
-  // Fetch movie data if in edit mode
-  useEffect(() => {
-    if (movieId) {
-      setIsEditMode(true);
-      fetchMovieData();
-    }
-  }, [movieId]);
-
-  const fetchMovieData = async () => {
+  // Fetch movie data if in edit mode - FIXED with useCallback
+  const fetchMovieData = useCallback(async () => {
+    if (!movieId) return;
+    
     try {
       setLoading(true);
       const movie = await movieAPI.getMovieById(movieId);
@@ -51,7 +46,14 @@ const MovieForm = ({ movieId, onSuccess }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [movieId]);
+
+  useEffect(() => {
+    if (movieId) {
+      setIsEditMode(true);
+      fetchMovieData();
+    }
+  }, [movieId, fetchMovieData]);
 
   const validateForm = () => {
     const newErrors = {};
